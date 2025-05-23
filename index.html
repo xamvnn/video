@@ -64,7 +64,7 @@
         padding: 8px 12px;
         border-radius: 8px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 18px;
         z-index: 5
       }
       .control-toggle:hover {
@@ -72,14 +72,13 @@
       }
       .controls {
         position: absolute;
-        top: 110px;
+        top: 50%;
         left: 20px;
+        transform: translateY(-50%);
         display: none;
         flex-direction: column;
         gap: 10px;
-        background: rgba(0, 0, 0, .7);
-        padding: 10px;
-        border-radius: 8px;
+        align-items: flex-start;
         z-index: 5
       }
       .controls.show {
@@ -93,15 +92,20 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: 14px;
-        opacity: 0.8
+        opacity: 0.3
       }
       .controls button:hover {
         background: rgba(0, 0, 0, .8);
-        opacity: 1
+        opacity: 0.8
       }
       .controls button.active {
         background: rgba(255, 255, 255, .3);
-        opacity: 1
+        opacity: 0.8
+      }
+      .controls .skip-button {
+        font-size: 18px;
+        padding: 35px 20px;
+        border-radius: 12px
       }
       .loading {
         position: absolute;
@@ -123,11 +127,11 @@
     <div class="subscribe-text">
       tml xin ủng hộ 1 sub nhé: <a href="https://www.youtube.com/@coilong864?sub_confirmation=1" target="_blank">Kênh YouTube</a>
     </div>
-    <button class="control-toggle" onclick="toggleControls()">⚙️ Controls</button>
+    <button class="control-toggle" onclick="toggleControls()">⚙️</button>
     <div class="controls" id="controls">
       <button onclick="prevVideo()">Previous</button>
       <button onclick="nextVideo()">Next</button>
-      <button onclick="skipForward()">+10s</button>
+      <button class="skip-button" onclick="skipForward()">+10s</button>
       <button onclick="setPlaybackSpeed(1.5)">x1.5</button>
       <button onclick="setPlaybackSpeed(2)">x2</button>
       <button onclick="setPlaybackSpeed(3)">x3</button>
@@ -210,14 +214,11 @@
           }
         });
       }
-      // Ẩn menu điều khiển sau khi chọn tốc độ
-      controls.classList.remove('show');
     }
 
     // Hàm tua nhanh 10 giây
     function skipForward() {
       videoPlayer.currentTime += 10;
-      controls.classList.remove('show');
     }
 
     // Hàm phát video hiện tại
@@ -271,7 +272,6 @@
       } else {
         playVideo(0);
       }
-      controls.classList.remove('show');
     }
 
     // Chuyển đến video trước đó
@@ -279,7 +279,6 @@
       if (currentVideoIndex > 0) {
         playVideo(currentVideoIndex - 1);
       }
-      controls.classList.remove('show');
     }
 
     // Tự động chuyển video khi kết thúc
@@ -287,7 +286,7 @@
       nextVideo();
     });
 
-    // Tùy chọn: Cuộn để chuyển video (giống TikTok)
+    // Tùy chọn: Cuộn để chuyển video (gi�似 TikTok)
     let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
