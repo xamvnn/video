@@ -10,7 +10,7 @@
         padding: 0;
         overflow: hidden;
         background: #000;
-        font-family: Arial, sans-serif
+        font-family: Arial, sans-serif;
       }
 
       .video-container {
@@ -19,13 +19,13 @@
         height: 86vh;
         display: flex;
         justify-content: center;
-        align-items: center
+        align-items: center;
       }
 
       video {
         width: 98%;
         max-height: 85vh;
-        object-fit: contain
+        object-fit: contain;
       }
 
       .video-title {
@@ -35,10 +35,10 @@
         color: #fff;
         font-size: 18px;
         font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, .7);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         max-width: 80%;
         word-wrap: break-word;
-        z-index: 5
+        z-index: 5;
       }
 
       .subscribe-text {
@@ -47,8 +47,8 @@
         left: 20px;
         color: #fff;
         font-size: 16px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, .7);
-        z-index: 5
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        z-index: 5;
       }
 
       .subscribe-text a {
@@ -65,18 +65,18 @@
         position: absolute;
         top: 80px;
         left: 20px;
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, 0.5);
         border: none;
         color: #fff;
         padding: 8px 12px;
         border-radius: 8px;
         cursor: pointer;
         font-size: 18px;
-        z-index: 5
+        z-index: 5;
       }
 
       .control-toggle:hover {
-        background: rgba(0, 0, 0, .8);
+        background: rgba(0, 0, 0, 0.8);
       }
 
       .controls {
@@ -88,9 +88,7 @@
         flex-direction: column;
         gap: 10px;
         align-items: flex-start;
-        align-items: flex-start;
-        /* Reverted to original */
-        z-index: 5
+        z-index: 5;
       }
 
       .controls.show {
@@ -98,30 +96,30 @@
       }
 
       .controls button {
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, 0.5);
         border: none;
         color: #fff;
         padding: 8px 12px;
         border-radius: 8px;
         cursor: pointer;
         font-size: 14px;
-        opacity: 0.3
+        opacity: 0.3;
       }
 
       .controls button:hover {
-        background: rgba(0, 0, 0, .8);
-        opacity: 0.8
+        background: rgba(0, 0, 0, 0.8);
+        opacity: 0.8;
       }
 
       .controls button.active {
-        background: rgba(255, 255, 255, .3);
-        opacity: 0.8
+        background: rgba(255, 255, 255, 0.3);
+        opacity: 0.8;
       }
 
       .controls .skip-button {
         font-size: 18px;
         padding: 35px 20px;
-        border-radius: 12px
+        border-radius: 12px;
       }
 
       .loading {
@@ -131,21 +129,22 @@
         transform: translate(-50%, -50%);
         color: #fff;
         font-size: 24px;
-        z-index: 10
+        z-index: 10;
       }
     </style>
   </head>
   <body>
     <div class="video-container">
-      <video id="videoPlayer" controls autoplay muted>
-        <source src="" type="video/mp4">Your browser does not support the video tag.
+      <video id="videoPlayer" controls muted>
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
       </video>
       <div class="video-title" id="videoTitle"></div>
-      <div class="subscribe-text"> tml xin ủng hộ 1 sub nhé: <a href="https://www.youtube.com/@coilong864?sub_confirmation=1" target="_blank">Kênh YouTube</a>
-      <div class="subscribe-text"> Xem ảnh hot VKL: <a href="http://github.com/xamvnn/photo/" target="_blank">Ảnh</a>         
+      <div class="subscribe-text">
+        Xin ủng hộ 1 sub nhé: <a href="https://www.youtube.com/@coilong864?sub_confirmation=1" target="_blank">Kênh YouTube</a><br>
+        Xem ảnh hot VKL: <a href="http://github.com/xamvnn/photo/" target="_blank">Ảnh</a>
       </div>
-      <button class="control-toggle" onclick="toggleControls()">⚙️</button>
-      <button class="control-toggle" onclick="toggleControls()">Tua</button>
+      <button class="control-toggle" onclick="toggleControls()">⚙️ Tua</button>
       <div class="controls" id="controls">
         <button onclick="prevVideo()">Previous</button>
         <button onclick="nextVideo()">Next</button>
@@ -167,6 +166,7 @@
       const loading = document.getElementById("loading");
       const controls = document.getElementById("controls");
       const speedButtons = document.querySelectorAll(".controls button:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3))");
+
       // Hàm parse CSV thành mảng đối tượng
       function parseCSV(csvText) {
         const lines = csvText.trim().split('\n');
@@ -185,37 +185,41 @@
         }
         return result;
       }
+
       // Hàm lưu chỉ số video hiện tại vào localStorage
       function saveVideoIndex(index) {
         localStorage.setItem('lastVideoIndex', index);
       }
+
       // Hàm lấy chỉ số video cuối cùng từ localStorage
       function getLastVideoIndex() {
         const savedIndex = localStorage.getItem('lastVideoIndex');
         return savedIndex !== null ? parseInt(savedIndex) : 0;
       }
+
       // Hàm lưu tốc độ phát vào localStorage
       function savePlaybackSpeed(speed) {
         localStorage.setItem('playbackSpeed', speed);
       }
+
       // Hàm lấy tốc độ phát từ localStorage
       function getSavedPlaybackSpeed() {
         const savedSpeed = localStorage.getItem('playbackSpeed');
         return savedSpeed !== null ? parseFloat(savedSpeed) : 1;
       }
+
       // Hàm hiển thị/ẩn menu điều khiển
       function toggleControls() {
         controls.classList.toggle('show');
       }
+
       // Hàm thiết lập tốc độ phát
       function setPlaybackSpeed(speed) {
         if (videoPlayer.playbackRate === speed) {
-          // Nếu nhấn lại vào tốc độ đang chọn, quay về 1x
           videoPlayer.playbackRate = 1;
           savePlaybackSpeed(1);
           speedButtons.forEach(button => button.classList.remove('active'));
         } else {
-          // Đặt tốc độ mới
           videoPlayer.playbackRate = speed;
           savePlaybackSpeed(speed);
           speedButtons.forEach(button => {
@@ -226,10 +230,12 @@
           });
         }
       }
+
       // Hàm tua nhanh 10 giây
       function skipForward() {
         videoPlayer.currentTime += 10;
       }
+
       // Hàm phát video hiện tại
       function playVideo(index) {
         if (index >= 0 && index < videoList.length) {
@@ -238,88 +244,88 @@
           videoTitle.textContent = videoList[index].title;
           currentVideoIndex = index;
           saveVideoIndex(index);
-          // Đặt tốc độ mặc định là 1x cho mỗi video mới
-          videoPlayer.playbackRate = 1;
-          savePlaybackSpeed(1);
-          speedButtons.forEach(button => button.classList.remove('active'));
-          // Attempt to play the video
+          videoPlayer.playbackRate = getSavedPlaybackSpeed();
+          speedButtons.forEach(button => {
+            button.classList.remove('active');
+            if (button.textContent === `x${videoPlayer.playbackRate}`) {
+              button.classList.add('active');
+            }
+          });
+
           const playPromise = videoPlayer.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => {
               console.error('Autoplay failed:', error);
               loading.textContent = 'Vui lòng nhấn vào video để phát';
+              loading.style.display = 'block';
             });
           }
+        } else {
+          loading.textContent = 'Không tìm thấy video trong danh sách';
+          loading.style.display = 'block';
         }
       }
+
+      // Chuyển đến video tiếp theo
+      function nextVideo() {
+        if (currentVideoIndex < videoList.length - 1) {
+          playVideo(currentVideoIndex + 1);
+        } else {
+          playVideo(0);
+        }
+      }
+
+      // Chuyển đến video trước đó
+      function prevVideo() {
+        if (currentVideoIndex > 0) {
+          playVideo(currentVideoIndex - 1);
+        }
+      }
+
       // Tải file CSV từ GitHub
-      fetch('https://dl.dropboxusercontent.com/scl/fi/jrsp4wt51ldr118yhjkn8/data3.txt?rlkey=60ecaxtax6u07hploelllf8vi&st=uartdnkz&dl=0').then(response => {
+      fetch('https://dl.dropboxusercontent.com/scl/fi/jrsp4wt51ldr118yhjkn8/data3.txt?rlkey=60ecaxtax6u07hploelllf8vi&st=uartdnkz&dl=0')
+        .then(response => {
           if (!response.ok) throw new Error('Failed to load CSV');
           return response.text();
-        }).then(data => {
-            videoList = parseCSV(data);
-            loading.style.display = 'none';
-            if (videoList.length > 0) {
-              currentVideoIndex = getLastVideoIndex();
-              if (currentVideoIndex >= videoList.length) {
-                currentVideoIndex = 0;
-                fetch('https://dl.dropboxusercontent.com/scl/fi/jrsp4wt51ldr118yhjkn8/data3.txt?rlkey=60ecaxtax6u07hploelllf8vi&st=uartdnkz&dl=0').then(response => {
-                  if (!response.ok) throw new Error('Failed to load CSV');
-                  return response.text();
-                }).then(data => {
-                    videoList = parseCSV(data);
-                    console.log('Video List:', videoList); // Debug log
-                    loading.style.display = 'none';
-                    if (videoList.length > 0) {
-                      currentVideoIndex = getLastVideoIndex();
-                      if (currentVideoIndex >= videoList.length) {
-                        currentVideoIndex = 0;
-                      }
-                      playVideo(currentVideoIndex);
-                    } else {
-                      loading.textContent = 'Không tìm thấy video trong danh sách';
-                    }
-                    playVideo(currentVideoIndex);
-                  } else {
-                    loading.textContent = 'Không tìm thấy video trong danh sách';
-                  }
-                }).catch(error => {
-                console.error('Lỗi tải CSV:', error);
-                loading.textContent = 'Lỗi tải danh sách video';
-              });
-            }).catch(error => {
-            console.error('Lỗi tải CSV:', error);
-            loading.textContent = 'Lỗi tải danh sách video';
-          });
-          // Chuyển đến video tiếp theo
-          function nextVideo() {
-            if (currentVideoIndex < videoList.length - 1) {
-              playVideo(currentVideoIndex + 1);
-            } else {
-              playVideo(0);
+        })
+        .then(data => {
+          videoList = parseCSV(data);
+          loading.style.display = 'none';
+          if (videoList.length > 0) {
+            currentVideoIndex = getLastVideoIndex();
+            if (currentVideoIndex >= videoList.length) {
+              currentVideoIndex = 0;
             }
+            playVideo(currentVideoIndex);
+          } else {
+            loading.textContent = 'Không tìm thấy video trong danh sách';
+            loading.style.display = 'block';
           }
-          // Chuyển đến video trước đó
-          function prevVideo() {
-            if (currentVideoIndex > 0) {
-              playVideo(currentVideoIndex - 1);
-            }
-          }
-          // Tự động chuyển video khi kết thúc
-          videoPlayer.addEventListener('ended', () => {
-            nextVideo();
-          });
-          // Tùy chọn: Cuộn để chuyển video (gi�似 TikTok)
-          let touchStartY = 0; window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-          }); window.addEventListener('touchend', (e) => {
-            const touchEndY = e.changedTouches[0].clientY;
-            if (touchStartY - touchEndY > 50) {
-              nextVideo();
-            } else if (touchEndY - touchStartY > 50) {
-              prevVideo();
-            }
-          });
+        })
+        .catch(error => {
+          console.error('Lỗi tải CSV:', error);
+          loading.textContent = 'Lỗi tải danh sách video';
+          loading.style.display = 'block';
+        });
+
+      // Tự động chuyển video khi kết thúc
+      videoPlayer.addEventListener('ended', () => {
+        nextVideo();
+      });
+
+      // Cuộn để chuyển video (giống TikTok)
+      let touchStartY = 0;
+      window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+      window.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (touchStartY - touchEndY > 50) {
+          nextVideo();
+        } else if (touchEndY - touchStartY > 50) {
+          prevVideo();
+        }
+      });
     </script>
   </body>
 </html>
