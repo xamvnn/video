@@ -281,7 +281,7 @@
 
     function toggleHeart() {
       const currentUrl = videoList[currentVideoIndex].url;
-      // Kiểm tra nếu đã thả tim (bỏ comment dòng dưới nếu muốn hạn chế thả tim một lần)
+      // Bỏ comment dòng dưới nếu muốn hạn chế thả tim một lần
       // if (hasHearted[currentUrl]) return;
       heartCounts[currentUrl] = (heartCounts[currentUrl] || 0) + 1;
       hasHearted[currentUrl] = true;
@@ -370,7 +370,7 @@
         videoPlayer.playbackRate = 1;
         savePlaybackSpeed(1);
         speedButtons.forEach(button => button.classList.remove('active'));
-        fetchStats(); // Lấy số liệu khi chuyển video
+        fetchStats(); // Lấy số liệu cho video mới
         const playPromise = videoPlayer.play();
         if (playPromise !== undefined) {
           playPromise.catch(error => {
