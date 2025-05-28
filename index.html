@@ -309,7 +309,7 @@
         comments: comments,
         commentText: commentText
       };
-      fetch('https://script.google.com/macros/s/AKfycbzjie9ZwclRQj9j9do-ntSJr6P8J8X1ZCYJjQ3BIoZWB7dNY_8QW7t-EYfv4RxC-TAUUw/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbyBHCnkqCOh2HiLQWBG5bf7pyumBHFMD8r8A4JIhBp025Eai3XJ4q7Bikhfsf9G1NFWig/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -331,7 +331,7 @@
     }
 
     function fetchStats() {
-      fetch('https://script.google.com/macros/s/AKfycbzjie9ZwclRQj9j9do-ntSJr6P8J8X1ZCYJjQ3BIoZWB7dNY_8QW7t-EYfv4RxC-TAUUw/exec')
+      fetch('https://script.google.com/macros/s/AKfycbyBHCnkqCOh2HiLQWBG5bf7pyumBHFMD8r8A4JIhBp025Eai3XJ4q7Bikhfsf9G1NFWig/exec')
         .then(response => response.json())
         .then(data => {
           console.log('Fetched stats:', data);
